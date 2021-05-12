@@ -1,0 +1,35 @@
+1，function combineRow(){
+        for(let i=0;i<15;i++){
+            if(squares[i].innerHTML===squares[i+1].innerHTML){
+                let combinedTotal =parseInt(squares[i].innerHTML)+parseInt(squares[i+1].innerHTML)
+                squares[i].innerHTML = combinedTotal
+                squares[i+1].innerHTML = 0
+            }
+        }
+    }
+      function keyRight(){
+        moveRight()
+        combineRow()
+        moveRight()
+        generate()  
+    }
+
+    这样写有些冗余
+    可以改成以下形式（3处）
+    if((i%4!==3)&&squares[i].innerHTML ===squares[i+1].innerHTML)//第一处
+    function combineRow(){
+        for(let i=0;i<15;i++){
+            if((i%4!==3)&&squares[i].innerHTML ===squares[i+1].innerHTML){
+                let combinedTotal =parseInt(squares[i].innerHTML)+parseInt(squares[i+1].innerHTML)
+                squares[i].innerHTML = combinedTotal//第二处
+                squares[i+1].innerHTML = 0//第二处
+            }
+        }
+    }
+    function keyRight(){
+        moveRight()
+        combineRow()
+        generate()  
+        //第三处少一行
+    }
+
