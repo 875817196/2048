@@ -28,6 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             generate()
         }
+        // 渲染颜色
+        for(let i=0;i<squares.length;i++){
+            squares[i].className = "n"+squares[i].innerHTML
+        }
         checkForGameOver()
     }
 
@@ -221,10 +225,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     function checkForGameOver(){
         let zeros =0
+        let possibleRow = 0
+        let possibleColumn = 0
         for(let i=0;i<squares.length;i++){
-            if(squares[i].innerHTML==0){zeros++}
+            if(squares[i].innerHTML==0){zeros++}         
         }   
-        if(zeros===0){
+        for(let j=0;(j<squares.length-1)&&(j!=3,7,11,15);j++){
+            if((squares[j].innerHTML)==(squares[j+1].innerHTML)){possibleRow++}  
+        }
+        for(let k=0;(k<squares.length-width);k++){
+            if((squares[k].innerHTML)==(squares[k+width].innerHTML)){possibleColumn++}  
+        }
+        
+
+       
+        if(zeros===0&&possibleRow===0&&possibleColumn===0){
             resultDisplay.innerHTML = 'You Lose'
             document.removeEventListener('keyup',control)
         }
